@@ -1,14 +1,16 @@
 import React, { Component } from 'react'
 import './App.css'
-import Canvas from './Canvas'
+import Creator from './Creator'
 
 class App extends Component {
   render() {
     return (
       <div className="App">
         <header className="App-header">
-          <Canvas />
-          <p>test</p>
+          <p>TEST</p>
+          <div className="container">
+            <Creator />
+          </div>
         </header>
       </div>
     )
