@@ -10,6 +10,7 @@ export default class Creator extends React.Component<{}, { text: string; image: 
     }
     this.text_onChange = this.text_onChange.bind(this)
     this.file_onChange = this.file_onChange.bind(this)
+    this.dl_onClick = this.dl_onClick.bind(this)
   }
 
   componentDidMount() {
@@ -71,6 +72,15 @@ export default class Creator extends React.Component<{}, { text: string; image: 
     }
   }
 
+  dl_onClick(e: any) {
+    const { canvas } = this as any
+    const data = canvas.toDataURL()
+    var dlLink = document.createElement('a')
+    dlLink.href = data
+    dlLink.download = 'gakitsubu.png'
+    dlLink.click()
+  }
+
   render() {
     return (
       <div>
@@ -83,6 +93,7 @@ export default class Creator extends React.Component<{}, { text: string; image: 
         />
         <textarea name="text" id="text" cols={30} rows={5} value={this.state.text} onChange={this.text_onChange} />
         <input id="file" name="file" type="file" accept="image/jpeg,image/png" onChange={this.file_onChange} />
+        <button onClick={this.dl_onClick}>画像をダウンロード</button>
       </div>
     )
   }
