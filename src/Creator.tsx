@@ -1,13 +1,15 @@
 import * as React from 'react'
 import './Creator.css'
 
-export default class Creator extends React.Component<{}, { text: string }> {
+export default class Creator extends React.Component<{}, { text: string; image: HTMLImageElement | undefined }> {
   constructor(props: any) {
     super(props)
     this.state = {
       text: 'ガキが・・・\n舐めてると\n潰すぞ',
+      image: undefined,
     }
-    this.onChange = this.onChange.bind(this)
+    this.text_onChange = this.text_onChange.bind(this)
+    this.file_onChange = this.file_onChange.bind(this)
   }
 
   componentDidMount() {
@@ -25,6 +27,13 @@ export default class Creator extends React.Component<{}, { text: string }> {
 
     ctx.fillStyle = 'gray'
     ctx.fillRect(0, 0, 640, 360)
+
+    if (this.state.image) {
+      const height = 360
+      const width = (this.state.image.width * height) / this.state.image.height
+      ctx.drawImage(this.state.image, (290 + 640) / 2 - width / 2, 0, width, height)
+    }
+
     ctx.fillStyle = 'black'
     ctx.fillRect(0, 0, 290, 360)
 
@@ -45,9 +54,21 @@ export default class Creator extends React.Component<{}, { text: string }> {
     })
   }
 
-  onChange(e: any) {
+  text_onChange(e: any) {
     this.setState({ text: e.target.value })
-    this.updateCanvas()
+  }
+
+  file_onChange(e: any) {
+    const image = new Image()
+    const file = e.target.files[0]
+    if (!file) {
+      this.setState({ image: undefined })
+      return
+    }
+    image.src = window.URL.createObjectURL(file)
+    image.onload = () => {
+      this.setState({ image })
+    }
   }
 
   render() {
@@ -60,7 +81,8 @@ export default class Creator extends React.Component<{}, { text: string }> {
           width="640"
           height="360"
         />
-        <textarea name="text" id="text" cols={30} rows={5} value={this.state.text} onChange={this.onChange} />
+        <textarea name="text" id="text" cols={30} rows={5} value={this.state.text} onChange={this.text_onChange} />
+        <input id="file" name="file" type="file" accept="image/jpeg,image/png" onChange={this.file_onChange} />
       </div>
     )
   }
