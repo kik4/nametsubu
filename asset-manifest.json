@@ -1,14 +1,13 @@
 {
-  "main.css": "/gakitsubu/static/css/main.460e5549.chunk.css",
-  "main.js": "/gakitsubu/static/js/main.8167c8da.chunk.js",
-  "main.js.map": "/gakitsubu/static/js/main.8167c8da.chunk.js.map",
-  "static/js/1.fa92c112.chunk.js": "/gakitsubu/static/js/1.fa92c112.chunk.js",
-  "static/js/1.fa92c112.chunk.js.map": "/gakitsubu/static/js/1.fa92c112.chunk.js.map",
+  "main.css": "/gakitsubu/static/css/main.1325db02.chunk.css",
+  "main.js": "/gakitsubu/static/js/main.62a91895.chunk.js",
+  "main.js.map": "/gakitsubu/static/js/main.62a91895.chunk.js.map",
+  "static/js/1.fbfa9ac1.chunk.js": "/gakitsubu/static/js/1.fbfa9ac1.chunk.js",
+  "static/js/1.fbfa9ac1.chunk.js.map": "/gakitsubu/static/js/1.fbfa9ac1.chunk.js.map",
   "runtime~main.js": "/gakitsubu/static/js/runtime~main.90172379.js",
   "runtime~main.js.map": "/gakitsubu/static/js/runtime~main.90172379.js.map",
-  "static/media/logo.svg": "/gakitsubu/static/media/logo.5d5d9eef.svg",
-  "static/css/main.460e5549.chunk.css.map": "/gakitsubu/static/css/main.460e5549.chunk.css.map",
+  "static/css/main.1325db02.chunk.css.map": "/gakitsubu/static/css/main.1325db02.chunk.css.map",
   "index.html": "/gakitsubu/index.html",
-  "precache-manifest.15b827f6eaa88c4c61f665b389451aa1.js": "/gakitsubu/precache-manifest.15b827f6eaa88c4c61f665b389451aa1.js",
+  "precache-manifest.86f6ea5638b86d5f1097086fd8ab6b7b.js": "/gakitsubu/precache-manifest.86f6ea5638b86d5f1097086fd8ab6b7b.js",
   "service-worker.js": "/gakitsubu/service-worker.js"
 }
