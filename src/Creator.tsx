@@ -57,7 +57,7 @@ export default class Creator extends React.Component<{}, { text: string; image: 
     ctx.fillStyle = 'black'
     ctx.fillRect(0, 0, textareaWidth, canvasHeight)
 
-    ctx.font = `normal ${fontSize}px 'Noto Serif JP'`
+    ctx.font = `normal ${fontSize}px san-serif`
     ctx.fillStyle = 'white'
     ctx.textAlign = 'center'
     ctx.textBaseline = 'middle'
