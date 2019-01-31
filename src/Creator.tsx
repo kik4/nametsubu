@@ -110,9 +110,15 @@ export default class Creator extends React.Component<{}, { text: string; image: 
           width="640"
           height="360"
         />
-        <textarea name="text" id="text" cols={30} rows={5} value={this.state.text} onChange={this.text_onChange} />
-        <input id="file" name="file" type="file" accept="image/jpeg,image/png" onChange={this.file_onChange} />
-        <button onClick={this.dl_onClick}>画像をダウンロード</button>
+        <p>
+          <textarea name="text" id="text" rows={5} value={this.state.text} onChange={this.text_onChange} />
+        </p>
+        <p>
+          <input id="file" name="file" type="file" accept="image/jpeg,image/png" onChange={this.file_onChange} />
+        </p>
+        <p>
+          <button onClick={this.dl_onClick}>画像をダウンロード</button>
+        </p>
       </div>
     )
   }
