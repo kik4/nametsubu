@@ -27,7 +27,8 @@ export default class Creator extends React.Component<{}, { text: string; image: 
 
     const canvasWidth = 640
     const canvasHeight = (canvasWidth * 9) / 16
-    const textareaWidth = canvasWidth - canvasHeight
+    const imageareaWidth = canvasHeight
+    const textareaWidth = canvasWidth - imageareaWidth
     const lines = this.state.text.split('\n')
     const lineCount = lines.length + 1
     const lineMaxLength = Math.max(...lines.map(line => line.length))
@@ -41,8 +42,15 @@ export default class Creator extends React.Component<{}, { text: string; image: 
     ctx.fillRect(0, 0, canvasWidth, canvasHeight)
 
     if (this.state.image) {
-      const height = canvasHeight
-      const width = (this.state.image.width * height) / this.state.image.height
+      let width = 0,
+        height = 0
+      if (this.state.image.width > this.state.image.height) {
+        height = imageareaWidth
+        width = (this.state.image.width * height) / this.state.image.height
+      } else {
+        width = imageareaWidth
+        height = (this.state.image.height * width) / this.state.image.width
+      }
       ctx.drawImage(this.state.image, (textareaWidth + canvasWidth) / 2 - width / 2, 0, width, height)
     }
 
