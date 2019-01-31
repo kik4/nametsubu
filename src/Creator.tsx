@@ -24,33 +24,44 @@ export default class Creator extends React.Component<{}, { text: string; image: 
   updateCanvas() {
     const { canvas } = this as any
     const ctx = canvas.getContext('2d')
-    ctx.clearRect(0, 0, 640, 360)
+
+    const canvasWidth = 640
+    const canvasHeight = (canvasWidth * 9) / 16
+    const textareaWidth = canvasWidth - canvasHeight
+    const lines = this.state.text.split('\n')
+    const lineCount = lines.length + 1
+    const lineMaxLength = Math.max(...lines.map(line => line.length))
+    const lineHeight = textareaWidth / lineCount
+    const charHeight = (48 * 6) / lineMaxLength
+    const fontSize = (42 * 6) / lineMaxLength
+    const lineX = textareaWidth - lineHeight
+    const lineY = (26 * 6) / lineMaxLength + 30
 
     ctx.fillStyle = 'gray'
-    ctx.fillRect(0, 0, 640, 360)
+    ctx.fillRect(0, 0, canvasWidth, canvasHeight)
 
     if (this.state.image) {
-      const height = 360
+      const height = canvasHeight
       const width = (this.state.image.width * height) / this.state.image.height
-      ctx.drawImage(this.state.image, (290 + 640) / 2 - width / 2, 0, width, height)
+      ctx.drawImage(this.state.image, (textareaWidth + canvasWidth) / 2 - width / 2, 0, width, height)
     }
 
     ctx.fillStyle = 'black'
-    ctx.fillRect(0, 0, 290, 360)
+    ctx.fillRect(0, 0, textareaWidth, canvasHeight)
 
-    ctx.font = "normal 42px 'Noto Serif JP'"
+    ctx.font = `normal ${fontSize}px 'Noto Serif JP'`
     ctx.fillStyle = 'white'
     ctx.textAlign = 'center'
     ctx.textBaseline = 'middle'
-    let x = 220
+    let x = lineX
     let yi = 0
     this.state.text.split('').forEach((c: string, index: number) => {
       if (c == '\n') {
-        x -= 220 / 3
+        x -= lineHeight
         yi = 0
         return
       }
-      ctx.fillText(c, x, 56 + yi * 48)
+      ctx.fillText(c, x, lineY + yi * charHeight, lineHeight)
       yi++
     })
   }
