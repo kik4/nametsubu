@@ -4,19 +4,19 @@ self.__precacheManifest = [
     "url": "/gakitsubu/static/js/runtime~main.90172379.js"
   },
   {
-    "revision": "e239f1b6603171d06af9",
-    "url": "/gakitsubu/static/js/main.e239f1b6.chunk.js"
+    "revision": "df33c5670deab9fa69a8",
+    "url": "/gakitsubu/static/js/main.df33c567.chunk.js"
   },
   {
     "revision": "1b010889b12bcdbb2f3e",
     "url": "/gakitsubu/static/js/1.1b010889.chunk.js"
   },
   {
-    "revision": "e239f1b6603171d06af9",
-    "url": "/gakitsubu/static/css/main.e6ef7e3b.chunk.css"
+    "revision": "df33c5670deab9fa69a8",
+    "url": "/gakitsubu/static/css/main.d50fe9cd.chunk.css"
   },
   {
-    "revision": "b02f9cca28a17696cd1082f2f66b3d0a",
+    "revision": "062fbf54118b4d4c5beddf1682f96c79",
     "url": "/gakitsubu/index.html"
   }
 ];
