@@ -6,6 +6,12 @@
   margin-top: 10px;
 }
 
+.container {
+  max-width: 640px;
+  display: flex;
+  flex-direction: column;
+}
+
 canvas {
   width: 100%;
 }
