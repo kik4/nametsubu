@@ -1,5 +1,4 @@
 import * as React from 'react'
-import './Creator.css'
 
 export default class Creator extends React.Component<
   {},
@@ -101,10 +100,12 @@ export default class Creator extends React.Component<
     }
   }
 
+  private isIOS = /[ \(]iP/.test(navigator.userAgent)
+
   dl_onClick(e: any) {
     const { canvas } = this as any
     const data = canvas.toDataURL()
-    var dlLink = document.createElement('a')
+    const dlLink = document.createElement('a')
     dlLink.href = data
     dlLink.download = 'gakitsubu.png'
     dlLink.click()
@@ -122,7 +123,7 @@ export default class Creator extends React.Component<
         />
         <div className="forms is-vertical">
           <textarea
-            className="textarea is-medium"
+            className="textarea"
             name="text"
             id="text"
             rows={5}
@@ -146,9 +147,11 @@ export default class Creator extends React.Component<
               </span>
             </label>
           </div>
-          <button className="button" onClick={this.dl_onClick}>
-            画像をダウンロード
-          </button>
+          {!this.isIOS && (
+            <button className="button" onClick={this.dl_onClick}>
+              画像をダウンロード
+            </button>
+          )}
         </div>
       </div>
     )
