@@ -5,3 +5,7 @@ canvas {
 textarea {
   font-size: medium;
 }
+
+input {
+  max-width: 100%;
+}
