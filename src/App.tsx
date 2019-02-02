@@ -1,18 +1,15 @@
 import React, { Component } from 'react'
-import './App.css'
 import Creator from './Creator'
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <header>
-          <p>TEST</p>
-        </header>
+      <section className="section">
         <div className="container">
+          <h1 className="title">ガキが舐めてると潰すぞメーカー</h1>
           <Creator />
         </div>
-      </div>
+      </section>
     )
   }
 }

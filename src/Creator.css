@@ -1,11 +1,15 @@
+.forms > *:nth-child(n + 2) {
+  margin-top: 10px;
+}
+
 canvas {
   width: 100%;
 }
 
-textarea {
-  font-size: medium;
+input {
+  max-width: 100%;
 }
 
-input {
+textarea {
   max-width: 100%;
 }
