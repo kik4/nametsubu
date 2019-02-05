@@ -20,7 +20,7 @@ self.__precacheManifest = [
     "url": "/nametsubu/static/css/1.22607412.chunk.css"
   },
   {
-    "revision": "17688ad6d326c9a52e1082e96b059725",
+    "revision": "63be66578af83db335c823d591e2aeec",
     "url": "/nametsubu/index.html"
   }
 ];
