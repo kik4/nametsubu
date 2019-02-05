@@ -3,6 +3,7 @@ import * as React from 'react'
 export default class Creator extends React.Component<
   {},
   {
+    canvas: HTMLCanvasElement
     text: string
     image: HTMLImageElement | undefined
     width: number
@@ -13,11 +14,19 @@ export default class Creator extends React.Component<
 > {
   constructor(props: any) {
     super(props)
+
+    const canvas = document.createElement('canvas') as HTMLCanvasElement
+    const width = 1280
+    const height = this.culcHeight(width)
+    canvas.width = width
+    canvas.height = height
+
     this.state = {
+      canvas,
       text: 'ガキが・・・\n舐めてると\n潰すぞ',
       image: undefined,
-      width: 1280,
-      height: this.culcHeight(1280),
+      width,
+      height,
       isTimeVisible: true,
       time: '00:03:43',
     }
@@ -30,14 +39,6 @@ export default class Creator extends React.Component<
 
   culcHeight(width: number): number {
     return (width * 9) / 16
-  }
-
-  componentDidMount() {
-    this.updateCanvas()
-  }
-
-  componentDidUpdate() {
-    this.updateCanvas()
   }
 
   drawRect(param: { ctx: any; x: number; y: number; width: number; height: number; radius: number; color: any }) {
@@ -67,8 +68,7 @@ export default class Creator extends React.Component<
   }
 
   updateCanvas() {
-    const { canvas } = this as any
-    const ctx = canvas.getContext('2d')
+    const ctx = this.state.canvas.getContext('2d')!
 
     const canvasWidth = this.state.width
     const canvasHeight = this.state.height
@@ -165,8 +165,7 @@ export default class Creator extends React.Component<
   private isIOS = /[ \(]iP/.test(navigator.userAgent)
 
   dl_onClick(e: any) {
-    const { canvas } = this as any
-    const data = canvas.toDataURL()
+    const data = this.state.canvas.toDataURL()
     const dlLink = document.createElement('a')
     dlLink.href = data
     dlLink.download = 'gakitsubu.png'
@@ -182,14 +181,17 @@ export default class Creator extends React.Component<
   }
 
   render() {
+    this.updateCanvas()
+
     return (
       <div>
-        <canvas
+        <img
           ref={e => {
             ;(this as any).canvas = e
           }}
-          width={this.state.width}
-          height={this.state.height}
+          src={this.state.canvas.toDataURL()}
+          alt=""
+          className="canvas-img"
         />
         <div className="forms is-vertical">
           <textarea
@@ -226,10 +228,12 @@ export default class Creator extends React.Component<
           {this.state.isTimeVisible && (
             <input className="input" type="time" step="1" value={this.state.time} onChange={this.time_onChange} />
           )}
-          {!this.isIOS && (
+          {!this.isIOS ? (
             <button className="button" onClick={this.dl_onClick}>
               画像をダウンロード
             </button>
+          ) : (
+            <div>画像長押しでDLできます</div>
           )}
         </div>
       </div>
