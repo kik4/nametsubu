@@ -1,7 +1,7 @@
 {
   "main.css": "/nametsubu/static/css/main.5ac0fa83.chunk.css",
-  "main.js": "/nametsubu/static/js/main.45921637.chunk.js",
-  "main.js.map": "/nametsubu/static/js/main.45921637.chunk.js.map",
+  "main.js": "/nametsubu/static/js/main.2855abd1.chunk.js",
+  "main.js.map": "/nametsubu/static/js/main.2855abd1.chunk.js.map",
   "static/css/1.22607412.chunk.css": "/nametsubu/static/css/1.22607412.chunk.css",
   "static/js/1.2d5be1ff.chunk.js": "/nametsubu/static/js/1.2d5be1ff.chunk.js",
   "static/js/1.2d5be1ff.chunk.js.map": "/nametsubu/static/js/1.2d5be1ff.chunk.js.map",
@@ -10,6 +10,6 @@
   "static/css/1.22607412.chunk.css.map": "/nametsubu/static/css/1.22607412.chunk.css.map",
   "static/css/main.5ac0fa83.chunk.css.map": "/nametsubu/static/css/main.5ac0fa83.chunk.css.map",
   "index.html": "/nametsubu/index.html",
-  "precache-manifest.933b34c49e225e3f56fddea7ff9c9abe.js": "/nametsubu/precache-manifest.933b34c49e225e3f56fddea7ff9c9abe.js",
+  "precache-manifest.836c5f07cc4125e6eb6c78c72ef0858d.js": "/nametsubu/precache-manifest.836c5f07cc4125e6eb6c78c72ef0858d.js",
   "service-worker.js": "/nametsubu/service-worker.js"
 }
