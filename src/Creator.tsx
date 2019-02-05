@@ -133,8 +133,8 @@ export default class Creator extends React.Component<
       const radius = (18 * canvasWidth) / 1280
       this.drawRect({ ctx, x: right - width, y, width, height, radius, color: 'rgba(0, 0, 0, 0.8)' })
 
-      const fontSize = (76 * canvasWidth) / 1280
-      ctx.font = `normal ${fontSize}px gothic`
+      const fontSize = (80 * canvasWidth) / 1280
+      ctx.font = `normal ${fontSize}px sans-serif`
       ctx.fillStyle = 'white'
       ctx.textAlign = 'center'
       ctx.textBaseline = 'middle'
