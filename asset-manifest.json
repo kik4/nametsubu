@@ -1,15 +1,15 @@
 {
-  "main.css": "/gakitsubu/static/css/main.5ac0fa83.chunk.css",
-  "main.js": "/gakitsubu/static/js/main.0169dd82.chunk.js",
-  "main.js.map": "/gakitsubu/static/js/main.0169dd82.chunk.js.map",
-  "static/css/1.22607412.chunk.css": "/gakitsubu/static/css/1.22607412.chunk.css",
-  "static/js/1.2d5be1ff.chunk.js": "/gakitsubu/static/js/1.2d5be1ff.chunk.js",
-  "static/js/1.2d5be1ff.chunk.js.map": "/gakitsubu/static/js/1.2d5be1ff.chunk.js.map",
-  "runtime~main.js": "/gakitsubu/static/js/runtime~main.90172379.js",
-  "runtime~main.js.map": "/gakitsubu/static/js/runtime~main.90172379.js.map",
-  "static/css/1.22607412.chunk.css.map": "/gakitsubu/static/css/1.22607412.chunk.css.map",
-  "static/css/main.5ac0fa83.chunk.css.map": "/gakitsubu/static/css/main.5ac0fa83.chunk.css.map",
-  "index.html": "/gakitsubu/index.html",
-  "precache-manifest.19a6b783c29fc06111eaa4a28ba773a1.js": "/gakitsubu/precache-manifest.19a6b783c29fc06111eaa4a28ba773a1.js",
-  "service-worker.js": "/gakitsubu/service-worker.js"
+  "main.css": "/nametsubu/static/css/main.5ac0fa83.chunk.css",
+  "main.js": "/nametsubu/static/js/main.4e4854a6.chunk.js",
+  "main.js.map": "/nametsubu/static/js/main.4e4854a6.chunk.js.map",
+  "static/css/1.22607412.chunk.css": "/nametsubu/static/css/1.22607412.chunk.css",
+  "static/js/1.2d5be1ff.chunk.js": "/nametsubu/static/js/1.2d5be1ff.chunk.js",
+  "static/js/1.2d5be1ff.chunk.js.map": "/nametsubu/static/js/1.2d5be1ff.chunk.js.map",
+  "runtime~main.js": "/nametsubu/static/js/runtime~main.3a7abafc.js",
+  "runtime~main.js.map": "/nametsubu/static/js/runtime~main.3a7abafc.js.map",
+  "static/css/1.22607412.chunk.css.map": "/nametsubu/static/css/1.22607412.chunk.css.map",
+  "static/css/main.5ac0fa83.chunk.css.map": "/nametsubu/static/css/main.5ac0fa83.chunk.css.map",
+  "index.html": "/nametsubu/index.html",
+  "precache-manifest.04006e52a2227362e4b4d0acaee091b3.js": "/nametsubu/precache-manifest.04006e52a2227362e4b4d0acaee091b3.js",
+  "service-worker.js": "/nametsubu/service-worker.js"
 }
