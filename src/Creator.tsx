@@ -226,7 +226,14 @@ export default class Creator extends React.Component<
             </label>
           </div>
           {this.state.isTimeVisible && (
-            <input className="input" type="time" step="1" value={this.state.time} onChange={this.time_onChange} />
+            <input
+              className="input"
+              type="text"
+              step="1"
+              value={this.state.time}
+              onChange={this.time_onChange}
+              placeholder="00:03:43"
+            />
           )}
           {!this.isIOS ? (
             <button className="button" onClick={this.dl_onClick}>
