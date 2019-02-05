@@ -103,7 +103,7 @@ export default class Creator extends React.Component<
     ctx.fillStyle = 'black'
     ctx.fillRect(0, 0, textareaWidth, canvasHeight)
 
-    ctx.font = `normal ${fontSize}px serif`
+    ctx.font = `normal ${fontSize}px "ヒラギノ明朝 ProN W6", "HiraMinProN-W6", "HG明朝E", "ＭＳ Ｐ明朝", "MS PMincho", "MS 明朝", serif`
     ctx.fillStyle = 'white'
     ctx.textAlign = 'center'
     ctx.textBaseline = 'middle'
@@ -131,6 +131,8 @@ export default class Creator extends React.Component<
       const y = (538 * canvasWidth) / 1280
       const height = (134 * canvasWidth) / 1280
       const radius = (18 * canvasWidth) / 1280
+      const margin = this.isFirefox ? (6 * canvasWidth) / 1280 : 0
+
       this.drawRect({ ctx, x: right - width, y, width, height, radius, color: 'rgba(0, 0, 0, 0.8)' })
 
       const fontSize = (80 * canvasWidth) / 1280
@@ -141,7 +143,7 @@ export default class Creator extends React.Component<
       if (!text) {
         text = this.state.time
       }
-      ctx.fillText(text, right - width / 2, y + height / 2)
+      ctx.fillText(text, right - width / 2, y + height / 2 + margin)
     }
   }
 
@@ -163,6 +165,7 @@ export default class Creator extends React.Component<
   }
 
   private isIOS = /[ \(]iP/.test(navigator.userAgent)
+  private isFirefox = window.navigator.userAgent.toLowerCase().indexOf('firefox') != -1
 
   dl_onClick(e: any) {
     const data = this.state.canvas.toDataURL()
@@ -235,13 +238,12 @@ export default class Creator extends React.Component<
               placeholder="00:03:43"
             />
           )}
-          {!this.isIOS ? (
+          {!this.isIOS && !this.isFirefox && (
             <button className="button" onClick={this.dl_onClick}>
               画像をダウンロード
             </button>
-          ) : (
-            <div>画像長押しでDLできます</div>
           )}
+          <div>画像長押しでDLできます</div>
         </div>
       </div>
     )
