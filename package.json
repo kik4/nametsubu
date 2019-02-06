@@ -8,6 +8,7 @@
     "@types/react": "^16.8.2",
     "@types/react-dom": "^16.8.0",
     "bulma": "^0.7.2",
+    "dayjs": "^1.8.4",
     "react": "^16.8.0",
     "react-dom": "^16.8.0",
     "react-scripts": "2.1.3",

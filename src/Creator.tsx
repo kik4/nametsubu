@@ -1,4 +1,5 @@
 import React, { useState, useMemo, useCallback } from 'react'
+import dayjs from 'dayjs'
 
 const culcHeight = (width: number): number => {
   return (width * 9) / 16
@@ -74,7 +75,7 @@ export default () => {
     const data = canvas.toDataURL()
     const dlLink = document.createElement('a')
     dlLink.href = data
-    dlLink.download = 'gakitsubu.png'
+    dlLink.download = `nametsubu-${dayjs().format('YYYY-MM-DDTHH-mm-ss')}.png`
     dlLink.click()
   }, [])
 
