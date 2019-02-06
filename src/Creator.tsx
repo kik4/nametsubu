@@ -133,8 +133,14 @@ export default () => {
       text = match[1]
     }
 
+    const fontSize = (80 * canvasWidth) / 1280
+    ctx.font = `normal ${fontSize}px sans-serif`
+    ctx.fillStyle = 'white'
+    ctx.textAlign = 'center'
+    ctx.textBaseline = 'middle'
+
     const right = (1230 * canvasWidth) / 1280
-    const width = ((40 * text.length + 64) * canvasWidth) / 1280
+    const width = (64 * canvasWidth) / 1280 + ctx.measureText(text).width
     const y = (538 * canvasWidth) / 1280
     const height = (134 * canvasWidth) / 1280
     const radius = (18 * canvasWidth) / 1280
@@ -142,11 +148,6 @@ export default () => {
 
     drawRect({ ctx, x: right - width, y, width, height, radius, color: 'rgba(0, 0, 0, 0.8)' })
 
-    const fontSize = (80 * canvasWidth) / 1280
-    ctx.font = `normal ${fontSize}px sans-serif`
-    ctx.fillStyle = 'white'
-    ctx.textAlign = 'center'
-    ctx.textBaseline = 'middle'
     if (!text) {
       text = time
     }
