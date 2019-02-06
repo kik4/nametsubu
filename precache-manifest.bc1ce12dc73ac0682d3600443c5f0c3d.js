@@ -4,15 +4,15 @@ self.__precacheManifest = [
     "url": "/nametsubu/static/js/runtime~main.3a7abafc.js"
   },
   {
-    "revision": "fe574151a0be09d8e5ca",
-    "url": "/nametsubu/static/js/main.fe574151.chunk.js"
+    "revision": "f8ab926635a5a7feffcc",
+    "url": "/nametsubu/static/js/main.f8ab9266.chunk.js"
   },
   {
     "revision": "0813461c6a484792e2e0",
     "url": "/nametsubu/static/js/1.0813461c.chunk.js"
   },
   {
-    "revision": "fe574151a0be09d8e5ca",
+    "revision": "f8ab926635a5a7feffcc",
     "url": "/nametsubu/static/css/main.1dc43b8c.chunk.css"
   },
   {
@@ -20,7 +20,7 @@ self.__precacheManifest = [
     "url": "/nametsubu/static/css/1.81212d0e.chunk.css"
   },
   {
-    "revision": "9b05197bc1d94b661fb17b8a7c7e6451",
+    "revision": "833c659d21a7d0ba260193f61dc6e61d",
     "url": "/nametsubu/index.html"
   }
 ];
