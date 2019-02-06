@@ -116,7 +116,8 @@ export default () => {
   ctx.textBaseline = 'middle'
   let x = lineX
   let yi = 0
-  text.split('').forEach((c: string, index: number) => {
+  const splitted = text.match(/[\uD800-\uDBFF][\uDC00-\uDFFF]|[\s\S]/g) || []
+  splitted.forEach((c: string, index: number) => {
     if (c == '\n') {
       x -= lineHeight
       yi = 0
