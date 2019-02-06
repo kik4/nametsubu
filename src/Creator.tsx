@@ -1,251 +1,209 @@
-import * as React from 'react'
+import React, { useState, useMemo, useCallback } from 'react'
 
-export default class Creator extends React.Component<
-  {},
-  {
-    canvas: HTMLCanvasElement
-    text: string
-    image: HTMLImageElement | undefined
-    width: number
-    height: number
-    isTimeVisible: boolean
-    time: string
-  }
-> {
-  constructor(props: any) {
-    super(props)
+const culcHeight = (width: number): number => {
+  return (width * 9) / 16
+}
 
+const drawRect = (param: {
+  ctx: any
+  x: number
+  y: number
+  width: number
+  height: number
+  radius: number
+  color: any
+}) => {
+  const ctx = param.ctx
+  const x = param.x
+  const y = param.y
+  const width = param.width
+  const height = param.height
+  const radius = param.radius || 0
+  const color = param.color
+
+  ctx.save()
+  ctx.fillStyle = color
+  ctx.beginPath()
+  ctx.moveTo(x + radius, y)
+  ctx.lineTo(x + width - radius, y)
+  ctx.arc(x + width - radius, y + radius, radius, Math.PI * 1.5, 0, false)
+  ctx.lineTo(x + width, y + height - radius)
+  ctx.arc(x + width - radius, y + height - radius, radius, 0, Math.PI * 0.5, false)
+  ctx.lineTo(x + radius, y + height)
+  ctx.arc(x + radius, y + height - radius, radius, Math.PI * 0.5, Math.PI, false)
+  ctx.lineTo(x, y + radius)
+  ctx.arc(x + radius, y + radius, radius, Math.PI, Math.PI * 1.5, false)
+  ctx.closePath()
+  ctx.fill()
+  ctx.restore()
+}
+
+const isIOS = /[ \(]iP/.test(navigator.userAgent)
+const isFirefox = navigator.userAgent.toLowerCase().indexOf('firefox') != -1
+
+export default () => {
+  const canvasWidth = 1280
+  const canvasHeight = useMemo(() => culcHeight(canvasWidth), [canvasWidth])
+  const canvas = useMemo(() => {
     const canvas = document.createElement('canvas') as HTMLCanvasElement
-    const width = 1280
-    const height = this.culcHeight(width)
-    canvas.width = width
-    canvas.height = height
+    canvas.width = canvasWidth
+    canvas.height = canvasHeight
+    return canvas
+  }, [canvasWidth, canvasHeight])
+  const ctx = useMemo(() => canvas.getContext('2d')!, [canvas])
 
-    this.state = {
-      canvas,
-      text: 'ガキが・・・\n舐めてると\n潰すぞ',
-      image: undefined,
-      width,
-      height,
-      isTimeVisible: true,
-      time: '00:03:43',
-    }
-    this.text_onChange = this.text_onChange.bind(this)
-    this.file_onChange = this.file_onChange.bind(this)
-    this.dl_onClick = this.dl_onClick.bind(this)
-    this.isTimeVisible_onChange = this.isTimeVisible_onChange.bind(this)
-    this.time_onChange = this.time_onChange.bind(this)
-  }
+  const [text, setText] = useState('ガキが・・・\n舐めてると\n潰すぞ')
+  const [time, setTime] = useState('00:03:43')
+  const [isTimeVisible, setIsTimeVisible] = useState(true)
+  const [image, setImage] = useState(undefined as HTMLImageElement | undefined)
 
-  culcHeight(width: number): number {
-    return (width * 9) / 16
-  }
-
-  drawRect(param: { ctx: any; x: number; y: number; width: number; height: number; radius: number; color: any }) {
-    const ctx = param.ctx
-    const x = param.x
-    const y = param.y
-    const width = param.width
-    const height = param.height
-    const radius = param.radius || 0
-    const color = param.color
-
-    ctx.save()
-    ctx.fillStyle = color
-    ctx.beginPath()
-    ctx.moveTo(x + radius, y)
-    ctx.lineTo(x + width - radius, y)
-    ctx.arc(x + width - radius, y + radius, radius, Math.PI * 1.5, 0, false)
-    ctx.lineTo(x + width, y + height - radius)
-    ctx.arc(x + width - radius, y + height - radius, radius, 0, Math.PI * 0.5, false)
-    ctx.lineTo(x + radius, y + height)
-    ctx.arc(x + radius, y + height - radius, radius, Math.PI * 0.5, Math.PI, false)
-    ctx.lineTo(x, y + radius)
-    ctx.arc(x + radius, y + radius, radius, Math.PI, Math.PI * 1.5, false)
-    ctx.closePath()
-    ctx.fill()
-    ctx.restore()
-  }
-
-  updateCanvas() {
-    const ctx = this.state.canvas.getContext('2d')!
-
-    const canvasWidth = this.state.width
-    const canvasHeight = this.state.height
-    const imageareaWidth = canvasHeight
-    const textareaWidth = canvasWidth - imageareaWidth
-    const lines = this.state.text.split('\n')
-    const lineCount = lines.length + 1
-    const lineMaxLength = Math.max(...lines.map(line => line.length))
-    const lineHeight = textareaWidth / lineCount
-    const magnifier = canvasWidth / 640
-    const charHeight = ((48 * 6) / lineMaxLength) * magnifier
-    const fontSize = ((42 * 6) / lineMaxLength) * magnifier
-    const lineX = textareaWidth - lineHeight
-    const lineY = ((26 * 6) / lineMaxLength + 30) * magnifier
-
-    ctx.fillStyle = 'gray'
-    ctx.fillRect(0, 0, canvasWidth, canvasHeight)
-
-    if (this.state.image) {
-      let width = 0,
-        height = 0
-      if (this.state.image.width > this.state.image.height) {
-        height = imageareaWidth
-        width = (this.state.image.width * height) / this.state.image.height
-      } else {
-        width = imageareaWidth
-        height = (this.state.image.height * width) / this.state.image.width
-      }
-      ctx.drawImage(this.state.image, (textareaWidth + canvasWidth) / 2 - width / 2, 0, width, height)
-    }
-
-    ctx.fillStyle = 'black'
-    ctx.fillRect(0, 0, textareaWidth, canvasHeight)
-
-    ctx.font = `normal ${fontSize}px "ヒラギノ明朝 ProN W6", "HiraMinProN-W6", "HG明朝E", "ＭＳ Ｐ明朝", "MS PMincho", "MS 明朝", serif`
-    ctx.fillStyle = 'white'
-    ctx.textAlign = 'center'
-    ctx.textBaseline = 'middle'
-    let x = lineX
-    let yi = 0
-    this.state.text.split('').forEach((c: string, index: number) => {
-      if (c == '\n') {
-        x -= lineHeight
-        yi = 0
-        return
-      }
-      ctx.fillText(c, x, lineY + yi * charHeight, lineHeight)
-      yi++
-    })
-
-    if (this.state.isTimeVisible) {
-      let text = ''
-      const match = this.state.time.match(/0?0?:?0?(.*)/)
-      if (match) {
-        text = match[1]
-      }
-
-      const right = (1230 * canvasWidth) / 1280
-      const width = ((40 * text.length + 64) * canvasWidth) / 1280
-      const y = (538 * canvasWidth) / 1280
-      const height = (134 * canvasWidth) / 1280
-      const radius = (18 * canvasWidth) / 1280
-      const margin = this.isFirefox ? (6 * canvasWidth) / 1280 : 0
-
-      this.drawRect({ ctx, x: right - width, y, width, height, radius, color: 'rgba(0, 0, 0, 0.8)' })
-
-      const fontSize = (80 * canvasWidth) / 1280
-      ctx.font = `normal ${fontSize}px sans-serif`
-      ctx.fillStyle = 'white'
-      ctx.textAlign = 'center'
-      ctx.textBaseline = 'middle'
-      if (!text) {
-        text = this.state.time
-      }
-      ctx.fillText(text, right - width / 2, y + height / 2 + margin)
-    }
-  }
-
-  text_onChange(e: any) {
-    this.setState({ text: e.target.value })
-  }
-
-  file_onChange(e: any) {
+  const file_onChange = useCallback((e: any) => {
     const image = new Image()
     const file = e.target.files[0]
     if (!file) {
-      this.setState({ image: undefined })
+      setImage(undefined)
       return
     }
     image.src = window.URL.createObjectURL(file)
     image.onload = () => {
-      this.setState({ image })
+      setImage(image)
     }
-  }
+  }, [])
 
-  private isIOS = /[ \(]iP/.test(navigator.userAgent)
-  private isFirefox = window.navigator.userAgent.toLowerCase().indexOf('firefox') != -1
-
-  dl_onClick(e: any) {
-    const data = this.state.canvas.toDataURL()
+  const dl_onClick = useCallback((e: any) => {
+    const data = canvas.toDataURL()
     const dlLink = document.createElement('a')
     dlLink.href = data
     dlLink.download = 'gakitsubu.png'
     dlLink.click()
+  }, [])
+
+  const imageareaWidth = canvasHeight
+  const textareaWidth = canvasWidth - imageareaWidth
+  const lines = text.split('\n')
+  const lineCount = lines.length + 1
+  const lineMaxLength = Math.max(...lines.map(line => line.length))
+  const lineHeight = textareaWidth / lineCount
+  const magnifier = canvasWidth / 640
+  const charHeight = ((48 * 6) / lineMaxLength) * magnifier
+  const fontSize = ((42 * 6) / lineMaxLength) * magnifier
+  const lineX = textareaWidth - lineHeight
+  const lineY = ((26 * 6) / lineMaxLength + 30) * magnifier
+
+  ctx.fillStyle = 'gray'
+  ctx.fillRect(0, 0, canvasWidth, canvasHeight)
+
+  if (image) {
+    let width = 0,
+      height = 0
+    if (image.width > image.height) {
+      height = imageareaWidth
+      width = (image.width * height) / image.height
+    } else {
+      width = imageareaWidth
+      height = (image.height * width) / image.width
+    }
+    ctx.drawImage(image, (textareaWidth + canvasWidth) / 2 - width / 2, 0, width, height)
   }
 
-  isTimeVisible_onChange(e: any) {
-    this.setState({ isTimeVisible: !this.state.isTimeVisible })
+  ctx.fillStyle = 'black'
+  ctx.fillRect(0, 0, textareaWidth, canvasHeight)
+
+  ctx.font = `normal ${fontSize}px "ヒラギノ明朝 ProN W6", "HiraMinProN-W6", "HG明朝E", "ＭＳ Ｐ明朝", "MS PMincho", "MS 明朝", serif`
+  ctx.fillStyle = 'white'
+  ctx.textAlign = 'center'
+  ctx.textBaseline = 'middle'
+  let x = lineX
+  let yi = 0
+  text.split('').forEach((c: string, index: number) => {
+    if (c == '\n') {
+      x -= lineHeight
+      yi = 0
+      return
+    }
+    ctx.fillText(c, x, lineY + yi * charHeight, lineHeight)
+    yi++
+  })
+
+  if (isTimeVisible) {
+    let text = ''
+    const match = time.match(/0?0?:?0?(.*)/)
+    if (match) {
+      text = match[1]
+    }
+
+    const right = (1230 * canvasWidth) / 1280
+    const width = ((40 * text.length + 64) * canvasWidth) / 1280
+    const y = (538 * canvasWidth) / 1280
+    const height = (134 * canvasWidth) / 1280
+    const radius = (18 * canvasWidth) / 1280
+    const margin = isFirefox ? (6 * canvasWidth) / 1280 : 0
+
+    drawRect({ ctx, x: right - width, y, width, height, radius, color: 'rgba(0, 0, 0, 0.8)' })
+
+    const fontSize = (80 * canvasWidth) / 1280
+    ctx.font = `normal ${fontSize}px sans-serif`
+    ctx.fillStyle = 'white'
+    ctx.textAlign = 'center'
+    ctx.textBaseline = 'middle'
+    if (!text) {
+      text = time
+    }
+    ctx.fillText(text, right - width / 2, y + height / 2 + margin)
   }
 
-  time_onChange(e: any) {
-    this.setState({ time: e.target.value })
-  }
-
-  render() {
-    this.updateCanvas()
-
-    return (
-      <div>
-        <img
-          ref={e => {
-            ;(this as any).canvas = e
-          }}
-          src={this.state.canvas.toDataURL()}
-          alt=""
-          className="canvas-img"
+  return (
+    <div>
+      <img src={canvas.toDataURL()} alt="" className="canvas-img" />
+      <div className="forms is-vertical">
+        <textarea
+          className="textarea"
+          name="text"
+          id="text"
+          rows={5}
+          value={text}
+          onChange={e => setText(e.target.value)}
         />
-        <div className="forms is-vertical">
-          <textarea
-            className="textarea"
-            name="text"
-            id="text"
-            rows={5}
-            value={this.state.text}
-            onChange={this.text_onChange}
-          />
-          <div className="file">
-            <label className="file-label">
-              <input
-                className="file-input"
-                type="file"
-                name="resume"
-                accept="image/jpeg,image/png"
-                onChange={this.file_onChange}
-              />
-              <span className="file-cta">
-                <span className="file-icon">
-                  <i className="fas fa-upload" />
-                </span>
-                <span className="file-label">画像を開く…</span>
-              </span>
-            </label>
-          </div>
-          <div>
-            <label className="checkbox">
-              <input type="checkbox" checked={this.state.isTimeVisible} onChange={this.isTimeVisible_onChange} />
-              動画の長さを表示
-            </label>
-          </div>
-          {this.state.isTimeVisible && (
+        <div className="file">
+          <label className="file-label">
             <input
-              className="input"
-              type="text"
-              step="1"
-              value={this.state.time}
-              onChange={this.time_onChange}
-              placeholder="00:03:43"
+              className="file-input"
+              type="file"
+              name="resume"
+              accept="image/jpeg,image/png"
+              onChange={file_onChange}
             />
-          )}
-          {!this.isIOS && !this.isFirefox && (
-            <button className="button" onClick={this.dl_onClick}>
-              画像をダウンロード
-            </button>
-          )}
-          <div>画像長押しでDLできます</div>
+            <span className="file-cta">
+              <span className="file-icon">
+                <i className="fas fa-upload" />
+              </span>
+              <span className="file-label">画像を開く…</span>
+            </span>
+          </label>
         </div>
+        <div>
+          <label className="checkbox">
+            <input type="checkbox" checked={isTimeVisible} onChange={() => setIsTimeVisible(!isTimeVisible)} />
+            動画の長さを表示
+          </label>
+        </div>
+        {isTimeVisible && (
+          <input
+            className="input"
+            type="text"
+            step="1"
+            value={time}
+            onChange={e => setTime(e.target.value)}
+            placeholder="00:03:43"
+          />
+        )}
+        {!isIOS && !isFirefox && (
+          <button className="button" onClick={dl_onClick}>
+            画像をダウンロード
+          </button>
+        )}
+        <div>画像長押しでDLできます</div>
       </div>
-    )
-  }
+    </div>
+  )
 }
