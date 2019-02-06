@@ -122,7 +122,15 @@ export default () => {
       yi = 0
       return
     }
-    ctx.fillText(c, x, lineY + yi * charHeight, lineHeight)
+    if (c === 'ー' || c === '〜' || c === '…') {
+      ctx.save()
+      ctx.translate(x, lineY + yi * charHeight)
+      ctx.rotate(Math.PI / 2)
+      ctx.fillText(c, 0, 0, lineHeight)
+      ctx.restore()
+    } else {
+      ctx.fillText(c, x, lineY + yi * charHeight, lineHeight)
+    }
     yi++
   })
 

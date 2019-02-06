@@ -18,7 +18,7 @@ export default () => {
             Tweet
           </a>
         </div>
-        <span className="version">ver 1.0.0</span>
+        <span className="version">ver 1.1.0</span>
       </div>
     </section>
   )
