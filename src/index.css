@@ -28,12 +28,6 @@ textarea {
   max-width: 100%;
 }
 
-.version {
-  font-size: 0.8rem;
-  color: gray;
-  text-align: right;
-}
-
 .share {
   text-align: center;
   margin-top: 5px;
